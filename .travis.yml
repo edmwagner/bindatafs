@@ -3,7 +3,10 @@ language: go
 sudo: false
 
 before_script:
-  - cd example; make timestamp
+  - cd example; find -type f -exec touch -t `date --date=2016-11-21T01:25:30+0800 +%Y%m%d%H%M.%S` {} \;
+
+script:
+  - go test -v ./...
 
 os:
   - linux
