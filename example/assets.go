@@ -85,7 +85,7 @@ func helloWorldTxt() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "hello/world.txt", size: 9, mode: os.FileMode(436), modTime: time.Unix(1480403234, 0)}
+	info := bindataFileInfo{name: "hello/world.txt", size: 9, mode: os.FileMode(436), modTime: time.Unix(1479662730, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -105,7 +105,7 @@ func helloTxt() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "hello.txt", size: 12, mode: os.FileMode(436), modTime: time.Unix(1480402810, 0)}
+	info := bindataFileInfo{name: "hello.txt", size: 12, mode: os.FileMode(436), modTime: time.Unix(1479662730, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -125,7 +125,7 @@ func indexHtml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "index.html", size: 258, mode: os.FileMode(436), modTime: time.Unix(1480402810, 0)}
+	info := bindataFileInfo{name: "index.html", size: 258, mode: os.FileMode(436), modTime: time.Unix(1479662730, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }

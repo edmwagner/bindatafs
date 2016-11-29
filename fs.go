@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"net/http"
 	"os"
+	"path"
 	"strings"
 )
 
@@ -36,7 +37,8 @@ func (assets *generatedAssets) Open(name string) (f http.File, err error) {
 		f = &File{
 			Reader: bytes.NewReader([]byte{}),
 			assets: assets,
-			name:   name,
+			name:   path.Base(name),
+			path:   path.Dir(name),
 			t:      TypeDir,
 			dirPos: 0,
 		}
@@ -54,7 +56,8 @@ func (assets *generatedAssets) Open(name string) (f http.File, err error) {
 	f = &File{
 		Reader: bytes.NewReader(buf),
 		assets: assets,
-		name:   name,
+		name:   path.Base(name),
+		path:   path.Dir(name),
 		t:      TypeFile,
 		dirPos: 0,
 	}

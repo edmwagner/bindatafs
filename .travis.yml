@@ -2,6 +2,9 @@ language: go
 
 sudo: false
 
+before_script:
+  - cd example; make timestamp
+
 os:
   - linux
   - osx
