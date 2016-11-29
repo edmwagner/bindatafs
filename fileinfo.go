@@ -3,6 +3,7 @@ package bindatafs
 import (
 	"bytes"
 	"io"
+	"net/http"
 	"os"
 	"path"
 	"time"
@@ -45,12 +46,21 @@ func (f *File) Readdir(count int) (lfi []os.FileInfo, err error) {
 
 	var fi os.FileInfo
 	var i, j int
+	var childFile http.File
 
 	exists := false
 	for _, name := range names {
 		if i >= f.dirPos {
 			exists = true
-			fi, err = f.assets.assetInfo(path.Join(f.name, string(name)))
+			childFile, err = f.assets.Open(path.Join(f.path, f.name, string(name)))
+			if err != nil {
+				return
+			}
+
+			fi, err = childFile.Stat()
+			if err != nil {
+				return
+			}
 			lfi = append(lfi, fi)
 			j++
 		}

@@ -2,6 +2,7 @@ package bindatafs_test
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 	"os"
 	"testing"
@@ -114,4 +115,58 @@ func TestFileSystem_Open(t *testing.T) {
 		}
 
 	}
+}
+
+func TestFileSystem_Readdir(t *testing.T) {
+	fs := example.FileSystem()
+	tests := []struct {
+		desc  string
+		path  string
+		files []string
+	}{
+		{
+			desc: "open hello folder",
+			path: "hello",
+			files: []string{
+				"bar.txt",
+				"world.txt",
+			},
+		},
+	}
+
+	for i, test := range tests {
+
+		t.Logf("test %d: %s", i+1, test.desc)
+
+		dir, err := fs.Open(test.path)
+		if err != nil {
+			t.Errorf("unexpected error: %s", err.Error())
+		}
+		defer dir.Close()
+
+		arrFileInfo, err := dir.Readdir(10)
+		if err != nil {
+			t.Errorf("unexpected error: %s", err.Error())
+		}
+
+		// get a list of files
+		if want, have := len(test.files), len(arrFileInfo); want != have {
+			t.Errorf("expected %d, got %d", want, have)
+		}
+		for j, file := range arrFileInfo {
+			if want, have := test.files[j], file.Name(); want != have {
+				t.Errorf("test %d: files %d, expected %#v, got %#v", i+1, j+1, want, have)
+			}
+		}
+
+		// try read pass limit
+		_, err = dir.Readdir(10)
+		if err == nil {
+			t.Errorf("expected error after read pass, got nil")
+		} else if err != io.EOF {
+			t.Errorf("expected io.EOF, got %#v", err.Error())
+		}
+
+	}
+
 }

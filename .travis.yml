@@ -3,7 +3,7 @@ language: go
 sudo: false
 
 before_script:
-  - cd example; find -type f -exec touch -t `date --date=2016-11-21T01:25:30+0800 +%Y%m%d%H%M.%S` {} \;
+  - TZ=Asia/Hong_Kong find ./example -type f -exec touch -t 201611210125.30 "{}" \;
 
 script:
   - go test -v ./...
