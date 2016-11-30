@@ -122,14 +122,14 @@ func TestFileSystem_Readdir(t *testing.T) {
 	tests := []struct {
 		desc  string
 		path  string
-		files []string
+		files map[string]bool
 	}{
 		{
 			desc: "open hello folder",
 			path: "hello",
-			files: []string{
-				"bar.txt",
-				"world.txt",
+			files: map[string]bool{
+				"bar.txt":   true,
+				"world.txt": true,
 			},
 		},
 	}
@@ -154,8 +154,8 @@ func TestFileSystem_Readdir(t *testing.T) {
 			t.Errorf("expected %d, got %d", want, have)
 		}
 		for j, file := range arrFileInfo {
-			if want, have := test.files[j], file.Name(); want != have {
-				t.Errorf("test %d: files %d, expected %#v, got %#v", i+1, j+1, want, have)
+			if _, ok := test.files[file.Name()]; !ok {
+				t.Errorf("test %d: files %d: %s was not an expected file", i+1, j+1, file.Name())
 			}
 		}
 

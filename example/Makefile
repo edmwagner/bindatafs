@@ -9,6 +9,6 @@ build:
 timestamp:
 	@echo
 	@echo "* Ensure timestamp of local assets"
-	find -type f -exec touch -t `date --date=2016-11-21T01:25:30+0800 +%Y%m%d%H%M.%S` {} \;
+	TZ=Asia/Hong_Kong find -type f -exec touch -t 201611210125.30 "{}" \;
 
 .PHONY: all build timestamp
