@@ -7,8 +7,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/yookoala/bindatafs"
-	"github.com/yookoala/bindatafs/example"
+	"github.com/go-serve/bindatafs"
+	"github.com/go-serve/bindatafs/example"
 )
 
 func TestFileSystem(t *testing.T) {

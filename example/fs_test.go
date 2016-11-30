@@ -8,7 +8,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/yookoala/bindatafs/example"
+	"github.com/go-serve/bindatafs/example"
 )
 
 func assetContents(name string) (str string) {
